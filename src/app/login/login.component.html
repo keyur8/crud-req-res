@@ -1,0 +1,33 @@
+<div class="container">
+    <h2>Login</h2>
+    <div>
+        "email": eve.holt@reqres.in
+    </div>
+    <div>
+        "password": pistol
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="form-group">
+        <mat-form-field class="full-width">
+        <label for="email">Email</label>
+        <input matInput type="email" id="email" formControlName="email">
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
+          <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</small>
+          <small *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format</small>
+        </div>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="full-width">
+        <label for="password">Password</label>
+        <input matInput type="password" id="password" formControlName="password">
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+          <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</small>
+        </div>
+    </mat-form-field>
+      </div>
+      <button  mat-raised-button type="submit" [ngClass]="loginForm.invalid ? 'action-disable' : 'button-action'" [disabled]="loginForm.invalid">Login</button>
+    </form>
+    <a routerLink="/register">Register</a>
+  </div>
+  

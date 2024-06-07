@@ -1,0 +1,54 @@
+<div>
+    <h2>User Management</h2>
+  
+    <div class="container">
+      <mat-card class="card">
+        <mat-card-title>{{ userId ? 'Edit User' : 'Create User' }}</mat-card-title>
+        <mat-card-content>
+          <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <mat-form-field class="full-width">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="first_name" placeholder="First Name">
+              <mat-error *ngIf="userForm.get('first_name')?.hasError('required')">
+                First name is required
+              </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field class="full-width">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="last_name" placeholder="Last Name">
+              <mat-error *ngIf="userForm.get('last_name')?.hasError('required')">
+                Last name is required
+              </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field class="full-width">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" placeholder="Email">
+              <mat-error *ngIf="userForm.get('email')?.hasError('required')">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="userForm.get('email')?.hasError('email')">
+                Please enter a valid email address
+              </mat-error>
+            </mat-form-field>
+  
+            <div class="button-container">
+              <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
+                {{ userId ? 'Update' : 'Create' }}
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  
+    <ul>
+      <li *ngFor="let user of users">
+        {{ user.first_name }} {{ user.last_name }} - {{ user.email }}
+        <button mat-button (click)="updateUser(user.id)">Update</button>
+        <button mat-button (click)="deleteUser(user.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  
